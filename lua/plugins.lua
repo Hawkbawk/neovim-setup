@@ -21,16 +21,16 @@ return require('packer').startup(function(use)
     "neovim/nvim-lspconfig",
   }
 
-  -- Fuzzy finder baby
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
-    requires = { { 'nvim-lua/plenary.nvim' }, { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } },
-    config = function()
-      require('telescope').setup {}
-      require('telescope').load_extension('fzf')
-    end
-
+    'junegunn/fzf',
+    'junegunn/fzf.vim',
+    run = function()
+      vim.cmd [[
+        fzf#install()
+      ]]
+    end,
   }
+
   use {
     'nvim-treesitter/nvim-treesitter',
     run = function()

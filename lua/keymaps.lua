@@ -1,16 +1,22 @@
-local telescope = require('telescope.builtin')
 local opts = { noremap = true, silent = true }
 
--- All of the telescope keymaps. There's some overlap here with LSP functions, but telescope gives us a nice picker if multiple definitions or implementations are found.
-vim.keymap.set('n', '<Leader>ff', telescope.find_files, opts)
-vim.keymap.set('n', '<Leader>rg', telescope.live_grep, opts)
-vim.keymap.set('n', '<Leader>gs', telescope.grep_string, opts)
-vim.keymap.set('n', '<Leader>cs', telescope.colorscheme, opts)
-vim.keymap.set('n', '<Leader>bf', telescope.current_buffer_fuzzy_find, opts)
-vim.keymap.set('n', '<Leader>ls', telescope.lsp_document_symbols, opts)
-vim.keymap.set('n', 'gr', telescope.lsp_references, opts)
-vim.keymap.set('n', 'gd', telescope.lsp_definitions, opts)
-vim.keymap.set('n', 'gi', telescope.lsp_implementations, opts)
+
+-- All the fzf keybindings!
+vim.keymap.set('n', '<Leader>ff', ":Files<CR>", opts)
+-- For some reason, this can't just be defined in the plugins file when setting up fzf. Not sure why...
+vim.cmd([[
+        function! RipgrepFzf(query, fullscreen)
+          let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+          let initial_command = printf(command_fmt, shellescape(a:query))
+          let reload_command = printf(command_fmt, '{q}')
+          let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+          call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+        endfunction
+
+        command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+      ]])
+vim.keymap.set('n', '<Leader>rg', ":RG <CR>", opts)
+vim.keymap.set('n', '<Leader>cl', ":Colors<CR>", opts)
 
 -- LSP bindings. Technically these should be in the on_attach, but it's nicer to have everything in one place
 local bufopts = { noremap = true, silent = true }
@@ -19,3 +25,6 @@ vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
 vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
 vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename, bufopts)
 vim.keymap.set('n', '<Leader>fmt', function() vim.lsp.buf.format { async = true } end, bufopts)
+vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
