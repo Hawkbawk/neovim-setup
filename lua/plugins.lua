@@ -24,11 +24,10 @@ return require('packer').startup(function(use)
   -- Fuzzy finder baby
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.0',
-    requires = { { 'nvim-lua/plenary.nvim' } },
+    requires = { { 'nvim-lua/plenary.nvim' }, { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } },
     config = function()
-      require('telescope').setup {
-      }
-      require('telescope').load_extension('fzy_native')
+      require('telescope').setup {}
+      require('telescope').load_extension('fzf')
     end
 
   }
@@ -38,6 +37,16 @@ return require('packer').startup(function(use)
       local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
       ts_update()
     end,
+  }
+
+  use {
+    'hrsh7th/nvim-cmp',
+    'hrsh7th/cmp-nvim-lsp',
+  }
+
+  use {
+    'dcampos/nvim-snippy',
+    'dcampos/cmp-snippy',
   }
   if packer_bootstrap then
     require('packer').sync()

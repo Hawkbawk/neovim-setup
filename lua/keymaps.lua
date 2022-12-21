@@ -8,9 +8,9 @@ vim.keymap.set('n', '<Leader>gs', telescope.grep_string, opts)
 vim.keymap.set('n', '<Leader>cs', telescope.colorscheme, opts)
 vim.keymap.set('n', '<Leader>bf', telescope.current_buffer_fuzzy_find, opts)
 vim.keymap.set('n', '<Leader>ls', telescope.lsp_document_symbols, opts)
-vim.keymap.set('n', '<Leader>lr', telescope.lsp_references, opts)
-vim.keymap.set('n', '<Leader>gd', telescope.lsp_definitions, opts)
-vim.keymap.set('n', '<Leader>gi', telescope.lsp_implementations, opts)
+vim.keymap.set('n', 'gr', telescope.lsp_references, opts)
+vim.keymap.set('n', 'gd', telescope.lsp_definitions, opts)
+vim.keymap.set('n', 'gi', telescope.lsp_implementations, opts)
 
 -- LSP bindings. Technically these should be in the on_attach, but it's nicer to have everything in one place
 local bufopts = { noremap = true, silent = true }
@@ -18,3 +18,4 @@ local bufopts = { noremap = true, silent = true }
 vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
 vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
 vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename, bufopts)
+vim.keymap.set('n', '<Leader>fmt', function() vim.lsp.buf.format { async = true } end, bufopts)
