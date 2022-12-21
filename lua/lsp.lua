@@ -5,16 +5,6 @@ require("mason-lspconfig").setup({
 
 local on_attach = function(client, bufnum)
     vim.api.nvim_buf_set_option(bufnum, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-    local bufopts = { noremap = true, silent = true, buffer = bufnum }
-
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, bufopts)
-    vim.keymap.set("n", "<leader>ff", function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
 require("mason-lspconfig").setup_handlers({
