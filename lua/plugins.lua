@@ -48,6 +48,22 @@ return require('packer').startup(function(use)
     'dcampos/nvim-snippy',
     'dcampos/cmp-snippy',
   }
+
+  use { "akinsho/toggleterm.nvim", tag = '*',
+    config = function()
+      require("toggleterm").setup {
+        open_mapping = [[<C-\>]],
+        hide_numbers = true,
+        terminal_mappings = true,
+        direction = 'float',
+        auto_scroll = true,
+        float_opts = {
+          border = "shadow"
+        },
+        autochdir = false,
+      }
+    end
+  }
   if packer_bootstrap then
     require('packer').sync()
   end
