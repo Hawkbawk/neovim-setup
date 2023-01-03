@@ -49,6 +49,15 @@ return require('packer').startup(function(use)
     'dcampos/cmp-snippy',
   }
 
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { {'kyazdani42/nvim-web-devicons', opt = true}, "nvim-lua/lsp-status.nvim" },
+  }
+
+  use {
+    "tpope/vim-endwise"
+  }
+
   use { "akinsho/toggleterm.nvim", tag = '*',
     config = function()
       require("toggleterm").setup {

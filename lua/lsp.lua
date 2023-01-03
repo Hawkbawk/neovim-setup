@@ -3,6 +3,7 @@ require("mason-lspconfig").setup({
   ensure_installed = { "tsserver", "ruby_ls", "gopls", "jsonls", "dockerls" }
 })
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local lsp_status = require("lsp-status")
 
 require('snippy').setup {
   mappings = {
@@ -15,7 +16,6 @@ require('snippy').setup {
     },
   },
 }
-
 local cmp = require("cmp")
 cmp.setup {
   snippet = {
@@ -54,24 +54,64 @@ cmp.setup {
   })
 }
 
+local on_attach = function (client, bufnr)
+  if client.server_capabilities.documentHighlightProvider then
+      vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+      vim.api.nvim_clear_autocmds { buffer = bufnr, group = "lsp_document_highlight" }
+      vim.api.nvim_create_autocmd("CursorHold", {
+          callback = vim.lsp.buf.document_highlight,
+          buffer = bufnr,
+          group = "lsp_document_highlight",
+          desc = "Document Highlight",
+      })
+      vim.api.nvim_create_autocmd("CursorMoved", {
+          callback = vim.lsp.buf.clear_references,
+          buffer = bufnr,
+          group = "lsp_document_highlight",
+          desc = "Clear All the References",
+      })
+  end
+  lsp_status.on_attach(client)
+end
+
+vim.diagnostic.config({
+  update_in_insert = false,
+  float = {
+    focusable = false,
+    style = "minimal",
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+	},
+  severity_sort = true,
+})
+
+vim.cmd([[
+  autocmd! CursorHold * lua vim.diagnostic.open_float(nil, { focus = false })
+]])
+
 require("mason-lspconfig").setup_handlers({
   -- The first entry (without a key) will be the default handler
   -- and will be called for each installed server that doesn't have
   -- a dedicated handler.
   function(server_name) -- default handler (optional)
     require("lspconfig")[server_name].setup {
-      capabilities = capabilities
+      capabilities = capabilities,
+      on_attach = on_attach,
     }
   end,
   -- Next, you can provide targeted overrides for specific servers.
   ["rust_analyzer"] = function()
     require("rust-tools").setup {
-      capabilities = capabilities
+      capabilities = capabilities,
+      on_attach = on_attach
     }
   end,
   ["sumneko_lua"] = function()
     require("lspconfig").sumneko_lua.setup {
       capabilities = capabilities,
+      on_attach = on_attach,
       settings = {
         Lua = {
           diagnostics = {
