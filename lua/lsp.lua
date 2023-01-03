@@ -3,7 +3,6 @@ require("mason-lspconfig").setup({
   ensure_installed = { "tsserver", "ruby_ls", "gopls", "jsonls", "dockerls" }
 })
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local lsp_status = require("lsp-status")
 
 require('snippy').setup {
   mappings = {
@@ -54,24 +53,23 @@ cmp.setup {
   })
 }
 
-local on_attach = function (client, bufnr)
+local on_attach = function(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
-      vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-      vim.api.nvim_clear_autocmds { buffer = bufnr, group = "lsp_document_highlight" }
-      vim.api.nvim_create_autocmd("CursorHold", {
-          callback = vim.lsp.buf.document_highlight,
-          buffer = bufnr,
-          group = "lsp_document_highlight",
-          desc = "Document Highlight",
-      })
-      vim.api.nvim_create_autocmd("CursorMoved", {
-          callback = vim.lsp.buf.clear_references,
-          buffer = bufnr,
-          group = "lsp_document_highlight",
-          desc = "Clear All the References",
-      })
+    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+    vim.api.nvim_clear_autocmds { buffer = bufnr, group = "lsp_document_highlight" }
+    vim.api.nvim_create_autocmd("CursorHold", {
+      callback = vim.lsp.buf.document_highlight,
+      buffer = bufnr,
+      group = "lsp_document_highlight",
+      desc = "Document Highlight",
+    })
+    vim.api.nvim_create_autocmd("CursorMoved", {
+      callback = vim.lsp.buf.clear_references,
+      buffer = bufnr,
+      group = "lsp_document_highlight",
+      desc = "Clear All the References",
+    })
   end
-  lsp_status.on_attach(client)
 end
 
 vim.diagnostic.config({
@@ -83,7 +81,7 @@ vim.diagnostic.config({
     source = "always",
     header = "",
     prefix = "",
-	},
+  },
   severity_sort = true,
 })
 

@@ -17,7 +17,7 @@ vim.cmd([[
       ]])
 vim.keymap.set('n', '<Leader>p', ":RG <CR>", opts)
 vim.keymap.set('n', '<Leader>cl', ":Colors<CR>", opts)
-vim.keymap.set('n', '<Leader>e', ":Lexplore<CR>", opts)
+vim.keymap.set('n', '<Leader>e', ":NvimTreeToggle<CR>", opts)
 
 -- LSP bindings. Technically these should be in the on_attach, but it's nicer to have everything in one place
 local bufopts = { noremap = true, silent = true }

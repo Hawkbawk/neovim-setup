@@ -1,3 +1,3 @@
-require('lualine').setup {
-  sections = { lualine_c = { "os.date('%a')", 'data', "require'lsp-status'.status()" } }
-}
+require('lualine').setup()
+require("fidget").setup{}
+require("gitsigns").setup {}

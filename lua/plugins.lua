@@ -51,11 +51,53 @@ return require('packer').startup(function(use)
 
   use {
     'nvim-lualine/lualine.nvim',
-    requires = { {'kyazdani42/nvim-web-devicons', opt = true}, "nvim-lua/lsp-status.nvim" },
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
   }
 
+  use "tpope/vim-endwise"
+  use "j-hui/fidget.nvim"
+  use "olimorris/onedarkpro.nvim"
+  use "ellisonleao/gruvbox.nvim"
   use {
-    "tpope/vim-endwise"
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+    },
+    config = function()
+      require("nvim-tree").setup {}
+    end
+  }
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require("gitsigns").setup {
+        on_attach = function(bufnr)
+          local gs = package.loaded.gitsigns
+
+          local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
+          end
+
+          -- Navigation
+          map('n', ']c', function()
+            if vim.wo.diff then return ']c' end
+            vim.schedule(function() gs.next_hunk() end)
+            return '<Ignore>'
+          end, { expr = true })
+
+          map('n', '[c', function()
+            if vim.wo.diff then return '[c' end
+            vim.schedule(function() gs.prev_hunk() end)
+            return '<Ignore>'
+          end, { expr = true })
+
+          map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
+          map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
+        end
+      }
+    end
   }
 
   use { "akinsho/toggleterm.nvim", tag = '*',
