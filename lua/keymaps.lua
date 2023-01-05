@@ -1,6 +1,4 @@
 local opts = { noremap = true, silent = true }
-
-
 -- All the fzf keybindings!
 vim.keymap.set('n', '<Leader>ff', ":Files<CR>", opts)
 -- For some reason, this can't just be defined in the plugins file when setting up fzf. Not sure why...
