@@ -16,8 +16,6 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
-vim.opt.background = 'dark'
-vim.cmd [[colorscheme gruvbox]]
 
 vim.cmd("filetype plugin indent on")
 
@@ -28,3 +26,6 @@ require("lsp")
 require("treesitter")
 require("keymaps")
 require("statusline")
+
+vim.opt.background = 'dark'
+vim.cmd [[colorscheme gruvbox]]
