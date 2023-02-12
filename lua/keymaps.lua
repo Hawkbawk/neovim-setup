@@ -15,7 +15,7 @@ vim.cmd([[
       ]])
 vim.keymap.set('n', '<Leader>p', ":RG <CR>", opts)
 vim.keymap.set('n', '<Leader>cl', ":Colors<CR>", opts)
-vim.keymap.set('n', '<Leader>e', ":NvimTreeToggle<CR>", opts)
+vim.keymap.set('n', '<Leader>e', ":NERDTreeToggle<CR>", opts)
 
 -- LSP bindings. Technically these should be in the on_attach, but it's nicer to have everything in one place
 local bufopts = { noremap = true, silent = true }
@@ -23,7 +23,6 @@ local bufopts = { noremap = true, silent = true }
 vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
 vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
 vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename, bufopts)
-vim.keymap.set('n', '<Leader>fmt', function() vim.lsp.buf.format { async = true } end, bufopts)
 vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)

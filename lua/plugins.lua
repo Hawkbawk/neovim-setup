@@ -14,13 +14,16 @@ local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
+  -- Makes git nice to use
   use 'tpope/vim-fugitive'
+  -- Mason let's us install LSPs and formatters really easily
   use {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
   }
 
+  -- FZF is really, really good at finding things fast, especially with ripgrep.
   use {
     'junegunn/fzf',
     'junegunn/fzf.vim',
@@ -31,6 +34,7 @@ return require('packer').startup(function(use)
     end,
   }
 
+  -- Treesitter is mostly here for syntax highlighting stuff. It does other stuff, but I'm not sure what and I also don't use it, so all is well.
   use {
     'nvim-treesitter/nvim-treesitter',
     run = function()
@@ -39,34 +43,35 @@ return require('packer').startup(function(use)
     end,
   }
 
+  -- Autocompletion engine!
   use {
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-nvim-lsp',
   }
 
+  -- Snippets
   use {
     'dcampos/nvim-snippy',
     'dcampos/cmp-snippy',
   }
 
+  -- Statusline.
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
   }
 
+  -- Auto insert end for ruby.
   use "tpope/vim-endwise"
+  -- Provides a nice window to check progress of LSP install.
   use "j-hui/fidget.nvim"
+  -- Some color themes.
   use "olimorris/onedarkpro.nvim"
   use "ellisonleao/gruvbox.nvim"
-  use {
-    'nvim-tree/nvim-tree.lua',
-    requires = {
-      'nvim-tree/nvim-web-devicons', -- optional, for file icons
-    },
-    config = function()
-      require("nvim-tree").setup {}
-    end
-  }
+
+  -- File tree.
+  use "preservim/nerdtree"
+  -- Git signs for telling what was changed in a file.
   use {
     'lewis6991/gitsigns.nvim',
     config = function()
@@ -100,6 +105,7 @@ return require('packer').startup(function(use)
     end
   }
 
+  -- A much nicer terminal
   use { "akinsho/toggleterm.nvim", tag = '*',
     config = function()
       require("toggleterm").setup {

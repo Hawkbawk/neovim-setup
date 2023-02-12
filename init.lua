@@ -1,6 +1,3 @@
--- Disable netrw, we have our own file explorer, with blackjack!
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 -- Set a whole bunch of options for a sensible vim experience
 vim.opt.expandtab = true
 vim.opt.smarttab = true

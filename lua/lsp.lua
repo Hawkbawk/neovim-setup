@@ -99,13 +99,6 @@ require("mason-lspconfig").setup_handlers({
       on_attach = on_attach,
     }
   end,
-  -- Next, you can provide targeted overrides for specific servers.
-  ["rust_analyzer"] = function()
-    require("rust-tools").setup {
-      capabilities = capabilities,
-      on_attach = on_attach
-    }
-  end,
   ["sumneko_lua"] = function()
     require("lspconfig").sumneko_lua.setup {
       capabilities = capabilities,
