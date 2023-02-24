@@ -38,6 +38,22 @@ return require('packer').startup(function(use)
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+      require("which-key").setup {}
+    end
+  }
+  use {
+    "folke/trouble.nvim",
+    requires = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {}
+    end
+  }
+
   -- Treesitter is mostly here for syntax highlighting stuff. It does other stuff, but I'm not sure what and I also don't use it, so all is well.
   use {
     'nvim-treesitter/nvim-treesitter',
