@@ -23,6 +23,7 @@ require("lsp")
 require("treesitter")
 require("keymaps")
 require("statusline")
+require("autocmds")
 
 vim.opt.background = 'dark'
 vim.cmd [[colorscheme gruvbox]]

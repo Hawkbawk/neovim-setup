@@ -33,6 +33,20 @@ return require('packer').startup(function(use)
       ]]
     end,
   }
+  use {
+    "ggandor/flit.nvim",
+    requires = { "tpope/vim-repeat", "ggandor/leap.nvim" },
+    config = function()
+      require("leap").add_default_mappings()
+      require("flit").setup {}
+    end
+  }
+
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    -- or                            , branch = '0.1.x',
+    requires = { { 'nvim-lua/plenary.nvim' } }
+  }
 
   -- Treesitter is mostly here for syntax highlighting stuff. It does other stuff, but I'm not sure what and I also don't use it, so all is well.
   use {
@@ -105,6 +119,7 @@ return require('packer').startup(function(use)
     end
   }
 
+  use "folke/neodev.nvim"
   -- A much nicer terminal
   use { "akinsho/toggleterm.nvim", tag = '*',
     config = function()
@@ -115,7 +130,7 @@ return require('packer').startup(function(use)
         direction = 'float',
         auto_scroll = true,
         float_opts = {
-          border = "shadow"
+          border = "double"
         },
         autochdir = false,
       }

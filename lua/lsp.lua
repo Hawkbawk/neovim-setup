@@ -1,3 +1,4 @@
+require("neodev").setup()
 require("mason").setup()
 require("mason-lspconfig").setup({
   ensure_installed = { "tsserver", "ruby_ls", "gopls", "jsonls", "dockerls" }
@@ -98,18 +99,5 @@ require("mason-lspconfig").setup_handlers({
       capabilities = capabilities,
       on_attach = on_attach,
     }
-  end,
-  ["sumneko_lua"] = function()
-    require("lspconfig").sumneko_lua.setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { "vim" }
-          }
-        }
-      }
-    }
-  end,
+  end
 })
