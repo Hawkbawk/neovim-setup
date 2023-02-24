@@ -11,8 +11,12 @@ vim.keymap.set('n', '<Leader>f', function()
   telescope.find_files()
 end, opts)
 vim.keymap.set('n', '<Leader>p', telescope.live_grep, opts)
+vim.keymap.set('n', '<Leader>b', telescope.buffers, opts)
 vim.keymap.set('n', '<Leader>cl', telescope.colorscheme, opts)
-vim.keymap.set('n', '<Leader>e', ":NERDTreeToggle<CR>", opts)
+vim.keymap.set('n', '<Leader>s', telescope.lsp_document_symbols, opts)
+vim.keymap.set('n', '<Leader>S', telescope.lsp_workspace_symbols, opts)
+
+vim.keymap.set('n', '<Leader>e', ":Neotree toggle<CR>", opts)
 
 -- LSP bindings. Technically these should be in the on_attach, but it's nicer to have everything in one place
 local bufopts = { noremap = true, silent = true }

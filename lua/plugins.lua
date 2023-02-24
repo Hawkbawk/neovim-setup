@@ -23,16 +23,6 @@ return require('packer').startup(function(use)
     "neovim/nvim-lspconfig",
   }
 
-  -- FZF is really, really good at finding things fast, especially with ripgrep.
-  use {
-    'junegunn/fzf',
-    'junegunn/fzf.vim',
-    run = function()
-      vim.cmd [[
-        fzf#install()
-      ]]
-    end,
-  }
   use {
     "ggandor/flit.nvim",
     requires = { "tpope/vim-repeat", "ggandor/leap.nvim" },
@@ -84,7 +74,28 @@ return require('packer').startup(function(use)
   use "ellisonleao/gruvbox.nvim"
 
   -- File tree.
-  use "preservim/nerdtree"
+  use {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      vim.g.neo_tree_remove_legacy_commands = 1
+      require("neo-tree").setup {
+        close_if_last_window = true,
+        filesystem = {
+          follow_current_file = true,
+          use_libuv_file_watcher = true,
+        },
+        buffers = {
+          follow_current_file = true,
+        }
+      }
+    end
+  }
   -- Git signs for telling what was changed in a file.
   use {
     'lewis6991/gitsigns.nvim',
