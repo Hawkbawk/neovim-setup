@@ -35,7 +35,7 @@ return require('packer').startup(function(use)
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.1',
     -- or                            , branch = '0.1.x',
-    requires = { { 'nvim-lua/plenary.nvim' } },
+    requires = { { 'nvim-lua/plenary.nvim' }, { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } },
     config = function()
       local actions = require("telescope.actions")
       local telescope_custom_pickers = require "telescope_custom_pickers"
@@ -55,6 +55,7 @@ return require('packer').startup(function(use)
             find_command = {
               'rg',
               '--files',
+              '--no-ignore',
             }
           },
           live_grep = {
@@ -65,8 +66,16 @@ return require('packer').startup(function(use)
               }
             }
           }
-        }
+        },
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case"
+          } }
       }
+      require("telescope").load_extension("fzf")
     end
   }
 
