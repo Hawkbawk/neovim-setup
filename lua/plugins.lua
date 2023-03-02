@@ -35,7 +35,39 @@ return require('packer').startup(function(use)
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.1',
     -- or                            , branch = '0.1.x',
-    requires = { { 'nvim-lua/plenary.nvim' } }
+    requires = { { 'nvim-lua/plenary.nvim' } },
+    config = function()
+      local actions = require("telescope.actions")
+      local telescope_custom_pickers = require "telescope_custom_pickers"
+      require("telescope").setup {
+        defaults = {
+          mappings = {
+            i = {
+              ["<Esc>"] = actions.close,
+              ["<c-j>"] = actions.move_selection_next,
+              ["<c-k>"] = actions.move_selection_previous,
+            }
+          }
+        },
+        pickers = {
+          find_files = {
+            hidden = true,
+            find_command = {
+              'rg',
+              '--files',
+            }
+          },
+          live_grep = {
+            mappings = {
+              i = {
+                ['<c-e>'] = telescope_custom_pickers.actions.set_extension,
+                ['<c-f>'] = telescope_custom_pickers.actions.set_folders
+              }
+            }
+          }
+        }
+      }
+    end
   }
 
   use {

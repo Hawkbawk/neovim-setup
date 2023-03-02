@@ -1,5 +1,6 @@
 local telescope = require("telescope.builtin")
 local wk = require("which-key")
+local telescope_custom_pickers = require("telescope_custom_pickers")
 local opts = { noremap = true, silent = true }
 
 -- Move around windows easier
@@ -14,6 +15,7 @@ wk.register({
   f = {
     name = "Find Things",
     f = { telescope.find_files, "Find Files" },
+    g = { telescope_custom_pickers.live_grep, "Live Grep" },
     s = { telescope.lsp_document_symbols, "Find Document Symbols" },
     S = { telescope.lsp_workspace_symbols, "Find Workspace Symbols" },
     b = { telescope.buffers, "Pick Buffer" },
@@ -25,7 +27,7 @@ wk.register({
     q = { "<cmd>TroubleToggle quickfix<cr>", "Toggle Quickfix" },
     d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Open Document Diagnostics" },
   },
-})
+}, { prefix = "<leader>" })
 
 vim.keymap.set('n', '<Leader>e', ":Neotree toggle<CR>", opts)
 
