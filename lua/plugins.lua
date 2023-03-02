@@ -11,74 +11,44 @@ end
 
 local packer_bootstrap = ensure_packer()
 
-
 return require('packer').startup(function(use)
+  -- Package envelope
   use 'wbthomason/packer.nvim'
   -- Makes git nice to use
   use 'tpope/vim-fugitive'
+  -- Makes it easy to change the surrounding text around the current
+  -- cursor.
+  use 'tpope/vim-surround'
   -- Mason let's us install LSPs and formatters really easily
   use {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
   }
-
+  -- Makes navigating really easy. No more memorizing
+  -- random arcane vim movement patterns
   use {
     "ggandor/flit.nvim",
     requires = { "tpope/vim-repeat", "ggandor/leap.nvim" },
     config = function()
-      require("leap").add_default_mappings()
-      require("flit").setup {}
-    end
-  }
-
-  use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
-    -- or                            , branch = '0.1.x',
-    requires = { { 'nvim-lua/plenary.nvim' }, { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } },
-    config = function()
-      local actions = require("telescope.actions")
-      local telescope_custom_pickers = require "telescope_custom_pickers"
-      require("telescope").setup {
-        defaults = {
-          mappings = {
-            i = {
-              ["<Esc>"] = actions.close,
-              ["<c-j>"] = actions.move_selection_next,
-              ["<c-k>"] = actions.move_selection_previous,
-            }
-          }
-        },
-        pickers = {
-          find_files = {
-            hidden = true,
-            find_command = {
-              'rg',
-              '--files',
-              '--no-ignore',
-            }
-          },
-          live_grep = {
-            mappings = {
-              i = {
-                ['<c-e>'] = telescope_custom_pickers.actions.set_extension,
-                ['<c-f>'] = telescope_custom_pickers.actions.set_folders
-              }
-            }
-          }
-        },
-        extensions = {
-          fzf = {
-            fuzzy = true,
-            override_generic_sorter = true,
-            override_file_sorter = true,
-            case_mode = "smart_case"
-          } }
+      require('leap').add_default_mappings()
+      vim.keymap.del({ "x", "o" }, "x")
+      vim.keymap.del({ "x", "o" }, "X")
+      require('flit').setup {
+        keys = { f = 'f', F = 'F', t = 't', T = 'T' },
+        labeled_modes = "nv",
+        multiline = true,
+        opts = {}
       }
-      require("telescope").load_extension("fzf")
     end
   }
-
+  -- Fuzzy finder
+  use {
+    'ibhagwan/fzf-lua',
+    -- optional for icon support
+    requires = { 'nvim-tree/nvim-web-devicons' }
+  }
+  -- Makes it easy to organize key-bindings
   use {
     "folke/which-key.nvim",
     config = function()
@@ -87,6 +57,7 @@ return require('packer').startup(function(use)
       require("which-key").setup {}
     end
   }
+  -- Helps you navigate diagnostics/issues from the LSP.
   use {
     "folke/trouble.nvim",
     requires = "nvim-tree/nvim-web-devicons",
@@ -94,16 +65,18 @@ return require('packer').startup(function(use)
       require("trouble").setup {}
     end
   }
-
-  -- Treesitter is mostly here for syntax highlighting stuff. It does other stuff, but I'm not sure what and I also don't use it, so all is well.
+  -- Treesitter is mostly here for syntax highlighting stuff. It does other
+  -- stuff, but I'm not sure what and I also don't use it, so all is well.
   use {
     'nvim-treesitter/nvim-treesitter',
+    -- Gotta love endwise that works with treesitter.
     requires = "RRethy/nvim-treesitter-endwise",
     run = function()
       local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
       ts_update()
     end,
   }
+  -- Automagically inserts matching pairs for quotes, brackets, def/end, etc.
   use {
     "windwp/nvim-autopairs",
     config = function()
@@ -116,27 +89,22 @@ return require('packer').startup(function(use)
       }
     end
   }
-
   -- Autocompletion engine!
   use {
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-nvim-lsp-signature-help'
   }
-
   -- Snippets
   use {
     'dcampos/nvim-snippy',
     'dcampos/cmp-snippy',
   }
-
   -- Statusline.
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
   }
-
-  -- Auto insert end for ruby.
-  use "tpope/vim-endwise"
   -- Provides a nice window to check progress of LSP install.
   use "j-hui/fidget.nvim"
   -- Some color themes.
@@ -208,15 +176,13 @@ return require('packer').startup(function(use)
         open_mapping = [[<C-\>]],
         hide_numbers = true,
         terminal_mappings = true,
-        direction = 'float',
+        direction = 'horizontal',
         auto_scroll = true,
-        float_opts = {
-          border = "double"
-        },
         autochdir = false,
       }
     end
   }
+
   if packer_bootstrap then
     require('packer').sync()
   end

@@ -7,6 +7,10 @@ api.nvim_create_autocmd(
     command = [[nnoremap <buffer><silent> q :close<CR>]] }
 )
 api.nvim_create_autocmd("FileType", { pattern = "man", command = [[nnoremap <buffer><silent> q :quit<CR>]] })
+api.nvim_create_autocmd("BufWritePost", {
+  pattern = "plugins.lua",
+  command = [[source ~/.config/nvim/lua/plugins.lua | PackerSync]]
+})
 
 -- Automatically format files according to LSP before writing out to disk.
 api.nvim_create_autocmd(

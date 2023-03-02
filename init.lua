@@ -7,6 +7,7 @@ vim.opt.mouse = "a"
 vim.opt.cmdheight = 2
 vim.opt.updatetime = 300
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.encoding = "utf-8"
 -- Make tabs a sensible size and uses spaces instead of tabs
 vim.opt.tabstop = 2
