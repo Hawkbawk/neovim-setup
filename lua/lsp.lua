@@ -16,6 +16,7 @@ require('snippy').setup {
     },
   },
 }
+
 local cmp = require("cmp")
 cmp.setup {
   snippet = {
@@ -24,7 +25,7 @@ cmp.setup {
     end
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs( -4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<CR>'] = cmp.mapping.confirm {
@@ -53,6 +54,12 @@ cmp.setup {
     { name = 'buffer' }
   })
 }
+
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
 
 local on_attach = function(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then

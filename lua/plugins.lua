@@ -89,10 +89,23 @@ return require('packer').startup(function(use)
   -- Treesitter is mostly here for syntax highlighting stuff. It does other stuff, but I'm not sure what and I also don't use it, so all is well.
   use {
     'nvim-treesitter/nvim-treesitter',
+    requires = "RRethy/nvim-treesitter-endwise",
     run = function()
       local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
       ts_update()
     end,
+  }
+  use {
+    "windwp/nvim-autopairs",
+    config = function()
+      require("nvim-autopairs").setup {
+        check_ts = true,
+        ts_config = {
+          lua = { 'string' },
+          javascript = { 'template_string' }
+        }
+      }
+    end
   }
 
   -- Autocompletion engine!

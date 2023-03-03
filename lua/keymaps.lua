@@ -15,6 +15,7 @@ wk.register({
   f = {
     name = "Find Things",
     f = { telescope.find_files, "Find Files" },
+    q = { telescope.quickfix, "Quickfix List" },
     g = { telescope_custom_pickers.live_grep, "Live Grep" },
     s = { telescope.lsp_document_symbols, "Find Document Symbols" },
     S = { telescope.lsp_workspace_symbols, "Find Workspace Symbols" },
@@ -27,16 +28,16 @@ wk.register({
     q = { "<cmd>TroubleToggle quickfix<cr>", "Toggle Quickfix" },
     d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Open Document Diagnostics" },
   },
+  k = { vim.lsp.buf.signature_help, "Signature Help" },
+  r = { vim.lsp.buf.rename, "Rename Variable" },
+  e = { "<cmd>Neotree toggle<cr>", "Toggle Neotree" }
 }, { prefix = "<leader>" })
 
-vim.keymap.set('n', '<Leader>e', ":Neotree toggle<CR>", opts)
-
--- LSP bindings. Technically these should be in the on_attach, but it's nicer to have everything in one place
-local bufopts = { noremap = true, silent = true }
-
-vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-vim.keymap.set("n", "<Leader>k", vim.lsp.buf.signature_help, bufopts)
-vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename, bufopts)
-vim.keymap.set('n', 'gr', telescope.lsp_references, opts)
-vim.keymap.set('n', 'gd', telescope.lsp_definitions, opts)
-vim.keymap.set('n', 'gi', telescope.lsp_implementations, opts)
+wk.register({
+  K = { vim.lsp.buf.hover, "Hover" },
+  g = {
+    r = { telescope.lsp_references, "Search References" },
+    d = { telescope.lsp_definitions, "Go-To Definition(s)" },
+    i = { telescope.lsp_implementations, "Go-To Implementation" },
+  }
+})
