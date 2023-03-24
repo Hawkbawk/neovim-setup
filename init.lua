@@ -13,7 +13,7 @@ vim.opt.encoding = "utf-8"
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 vim.cmd("filetype plugin indent on")
 
@@ -26,5 +26,5 @@ require("keymaps")
 require("statusline")
 require("autocmds")
 
-vim.opt.background = 'dark'
-vim.cmd [[colorscheme gruvbox]]
+vim.opt.background = "dark"
+vim.cmd([[colorscheme gruvbox]])
