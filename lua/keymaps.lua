@@ -1,5 +1,7 @@
 local fzf = require("fzf-lua")
 local wk = require("which-key")
+local dap = require("dap")
+local dap_ui = require("dap.ui.widgets")
 local opts = { noremap = true, silent = true }
 
 -- Move around windows easier
@@ -29,6 +31,28 @@ wk.register({
 	k = { vim.lsp.buf.signature_help, "Signature Help" },
 	r = { vim.lsp.buf.rename, "Rename Variable" },
 	e = { "<cmd>Neotree toggle<cr>", "Toggle Neotree" },
+	d = {
+		name = "Debugger",
+		b = { dap.toggle_breakpoint, "Toggle Breakpoint" },
+		c = { dap.continue, "Continue Execution" },
+		i = { dap.step_into, "Step Into" },
+		o = { dap.step_out, "Step Out" },
+		p = { dap_ui.preview, "Preview" },
+		f = {
+			function()
+				dap_ui.centered_float(dap_ui.frames)
+			end,
+			"View Frames",
+		},
+		h = { dap_ui.hover, "Hover" },
+		s = {
+			function()
+				dap_ui.centered_float(dap_ui.scopes)
+			end,
+			"Scopes",
+		},
+		r = { dap.repl.toggle, "Toggle REPL" },
+	},
 }, { prefix = "<leader>" })
 
 wk.register({

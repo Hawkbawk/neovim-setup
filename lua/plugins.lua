@@ -46,6 +46,7 @@ return require("packer").startup(function(use)
 				require("null-ls").setup()
 			end,
 		},
+		use("mfussenegger/nvim-dap"),
 	})
 	-- Makes navigating really easy. No more memorizing
 	-- random arcane vim movement patterns
