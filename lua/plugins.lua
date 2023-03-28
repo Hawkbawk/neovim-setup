@@ -19,6 +19,8 @@ return require("packer").startup(function(use)
 	-- Makes it easy to change the surrounding text around the current
 	-- cursor.
 	use("tpope/vim-surround")
+	-- Github Copilot cause better autocomplete is wonderful
+	use("github/copilot.vim")
 	-- Mason let's us install LSPs and formatters really easily
 	use({
 		"williamboman/mason.nvim",
