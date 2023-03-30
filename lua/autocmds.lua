@@ -16,5 +16,13 @@ api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function(_)
 		vim.lsp.buf.format()
+		vim.lsp.buf.code_action({
+			apply = true,
+			context = {
+				only = {
+					"source.organizeImports",
+				},
+			},
+		})
 	end,
 })

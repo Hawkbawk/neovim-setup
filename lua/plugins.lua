@@ -68,7 +68,13 @@ return require("packer").startup(function(use)
 				require("null-ls").setup()
 			end,
 		},
-		use("mfussenegger/nvim-dap"),
+		use({
+			"rcarriga/nvim-dap-ui",
+			requires = { "mfussenegger/nvim-dap", "mortepau/codicons.nvim" },
+			config = function()
+				require("dapui").setup()
+			end,
+		}),
 	})
 	-- Automagically configures the Dart LSP and adds nice tooling for Flutter
 	use({
@@ -262,7 +268,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use("folke/neodev.nvim")
+	use({ "folke/neodev.nvim", library = { plugins = { "nvim-dap-ui" }, types = true } })
 	-- A much nicer terminal
 	use({
 		"akinsho/toggleterm.nvim",

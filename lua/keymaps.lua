@@ -30,12 +30,12 @@ wk.register({
 	},
 	k = { vim.lsp.buf.signature_help, "Signature Help" },
 	r = { vim.lsp.buf.rename, "Rename Variable" },
-	a = { vim.lsp.buf.code_action, "Code Action" },
 	e = { "<cmd>Neotree toggle<cr>", "Toggle Neotree" },
 	d = {
 		name = "Debugger",
 		b = { dap.toggle_breakpoint, "Toggle Breakpoint" },
 		l = { require("fzf-lua.providers.dap").breakpoints, "View All Breakpoints" },
+		u = { require("dapui").toggle, "Toggle DAP UI" },
 		c = { dap.continue, "Continue Execution" },
 		i = { dap.step_into, "Step Into" },
 		o = { dap.step_out, "Step Out" },
@@ -64,7 +64,14 @@ wk.register({
 		d = { fzf.lsp_definitions, "Go-To Definition(s)" },
 		i = { fzf.lsp_implementations, "Go-To Implementation" },
 	},
+	d = {
+		n = { dap.step_over, "Next Line (Debugging)" },
+		c = { dap.continue, "Continue (Debugging)" },
+		i = { dap.step_into, "Step Into" },
+		o = { dap.step_out, "Step Out" },
+	},
 	c = {
+		a = { vim.lsp.buf.code_action, "Code Actions" },
 		p = {
 			r = { [[<cmd>let @+ = expand("%")<cr>]], "Copy Relative Path" },
 			a = { [[<cmd>let @+ = epand("%:p")<cr>]], "Copy Absolute Path" },
