@@ -2,32 +2,53 @@
 return {
   {
   "ibhagwan/fzf-lua",
-  config = function(opts)
-    -- calling `setup` is optional for customization
-    require("fzf-lua").setup({})
-  end,
-  keys = {
+  opts = {
+    'telescope', -- The profile to use, see :h fzf-lua-profiles for options
+    files = {
+      fd_opts = "--color=never --type f --hidden --no-ignore --exclude node_modules --exclude .git"
+    }
+  },
+  keys = function()
+    local fzf = require("fzf-lua")
+
+    return {
       {
         "<leader>f",
-        function()
-          require("fzf-lua").files()
-        end,
+        fzf.files,
         desc = "Find Files",
       },
       {
         "<leader>/",
-        function()
-          require("fzf-lua").live_grep()
-        end,
+        fzf.live_grep,
         desc = "Live Grep"
       },
       {
         "<leader>o",
-        function()
-          require("fzf-lua").oldfiles()
-        end,
+        fzf.oldfiles,
         desc = "Find in Old Files"
+      },
+      {
+        "gd",
+        function()
+          fzf.lsp_definitions({ jump_to_single_result = true})
+        end,
+        desc = "Go-To Definition"
+      },
+      {
+        "gi",
+        function()
+          fzf.lsp_implementations({jump_to_single_result = true})
+        end,
+        desc = "Go-To Implementations",
+      },
+      {
+        "gr",
+        function()
+          fzf.lsp_references({jump_to_single_result = true})
+        end,
+        desc = "Go-To References"
       }
-    },
+    }
+  end
   }
 }

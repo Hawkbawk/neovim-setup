@@ -14,7 +14,6 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
-
 vim.g.mapleader = " "
 -- So we can just use oil. netrw is blegh
 vim.g.loaded_netrw = 1

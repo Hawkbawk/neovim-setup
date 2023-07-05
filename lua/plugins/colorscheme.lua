@@ -1,11 +1,11 @@
 
 return {
-	{
+  {
     "ellisonleao/gruvbox.nvim",
-    priority = 1000,
-    lazy = false,
+    event = "VeryLazy",
     config = function()
+      vim.o.background = "dark"
       vim.cmd [[colorscheme gruvbox]]
-    end
+    end,
   }
 }

@@ -8,6 +8,12 @@ return {
       keymaps = {
         ["l"] = "actions.select",
         ["h"] = "actions.parent",
+      },
+      float = {
+        padding = 4,
+        win_options = {
+          winblend = 0
+        }
       }
     },
     keys = {

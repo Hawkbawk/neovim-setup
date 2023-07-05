@@ -13,7 +13,7 @@ autocmd("FileType", {
 -- For some filetypes, it makes more sense to quit using ESC in addition
 -- to just q
 autocmd("FileType", {
-  pattern = { "oil" },
+  pattern = { "oil", "lazy" },
   command = [[nnoremap <buffer><silent> <ESC> :quit<CR>]],
   group = easy_quit_group
 })
