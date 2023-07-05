@@ -1,4 +1,9 @@
 {
+  "fzf-lua": { "branch": "main", "commit": "7eb98dc2cb61d0395bf1e9b4e754b645dc3d2d60" },
   "gruvbox.nvim": { "branch": "main", "commit": "df149bccb19a02c5c2b9fa6ec0716f0c0487feb0" },
-  "lazy.nvim": { "branch": "main", "commit": "0d61488b89a570415177f75a36ef93616aac6c77" }
+  "lazy.nvim": { "branch": "main", "commit": "0d61488b89a570415177f75a36ef93616aac6c77" },
+  "neodev.nvim": { "branch": "main", "commit": "a2b1d8fb9fa4daa35d3fd9123bccccccbd4a3520" },
+  "nvim-lspconfig": { "branch": "master", "commit": "2187f222c37cb5fd7cf96f242e5c8a4a340f2596" },
+  "oil.nvim": { "branch": "master", "commit": "a5ff72a8da0df1042ee4c7705c301901062fa6d5" },
+  "which-key.nvim": { "branch": "main", "commit": "d871f2b664afd5aed3dc1d1573bef2fb24ce0484" }
 }
