@@ -2,8 +2,15 @@
 return {
   {
   "ibhagwan/fzf-lua",
+  cmd = "FzfLua",
   opts = {
-    'telescope', -- The profile to use, see :h fzf-lua-profiles for options
+    'max-perf', -- The profile to use, see :h fzf-lua-profiles for options
+    previewers = {
+      bat = {
+        cmd = "bat",
+        args = "--color=never --style=numbers"
+      }
+    },
     files = {
       fd_opts = "--color=never --type f --hidden --no-ignore --exclude node_modules --exclude .git"
     }
@@ -26,6 +33,11 @@ return {
         "<leader>o",
         fzf.oldfiles,
         desc = "Find in Old Files"
+      },
+      {
+        "<leader>h",
+        fzf.help_tags,
+        desc = "Search Help Tags"
       },
       {
         "gd",

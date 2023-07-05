@@ -36,7 +36,11 @@ autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
       vim.wo.rnu = false
     end
   end
+})
 
+autocmd("BufWritePre", {
+  pattern = "*",
+  command = [[%s/\s\+$//e]]
 })
 
 
