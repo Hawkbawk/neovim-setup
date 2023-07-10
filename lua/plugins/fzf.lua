@@ -20,7 +20,7 @@ return {
 
     return {
       {
-        "<leader>f",
+        "<leader>ff",
         fzf.files,
         desc = "Find Files",
       },
@@ -30,12 +30,12 @@ return {
         desc = "Live Grep"
       },
       {
-        "<leader>o",
+        "<leader>fo",
         fzf.oldfiles,
         desc = "Find in Old Files"
       },
       {
-        "<leader>h",
+        "<leader>fh",
         fzf.help_tags,
         desc = "Search Help Tags"
       },
