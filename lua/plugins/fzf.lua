@@ -25,6 +25,11 @@ return {
         desc = "Find Files",
       },
       {
+        "<leader>fb",
+        fzf.buffers,
+        desc = "Find Buffers"
+      },
+      {
         "<leader>/",
         fzf.live_grep,
         desc = "Live Grep"
@@ -38,6 +43,16 @@ return {
         "<leader>fh",
         fzf.help_tags,
         desc = "Search Help Tags"
+      },
+      {
+        "<leader>fs",
+        fzf.lsp_document_symbols,
+        desc = "Document Symbols"
+      },
+      {
+        "<leader>fS",
+        fzf.lsp_workspace_symbols,
+        desc = "Workspace Symbols"
       },
       {
         "gd",
