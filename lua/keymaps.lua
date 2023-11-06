@@ -1,6 +1,4 @@
-
 local wk = require("which-key")
-
 
 local opts = { noremap = true, silent = true }
 
@@ -16,6 +14,15 @@ vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 vim.keymap.set("n", "<ESC>", "<cmd>noh<cr><esc>", opts)
 
 wk.register({
-  l = { "<cmd>Lazy<cr>", "Open Lazy panel" }
+	l = {
+		l = { "<cmd>Lazy<cr>", "Open Lazy panel" },
+		f = {
+			function()
+				vim.lsp.buf.format({
+					async = false,
+				})
+			end,
+			"Format File",
+		},
+	},
 }, { prefix = "<leader>" })
-

@@ -3,7 +3,7 @@ return {
   {
     'stevearc/oil.nvim',
     opts = {
-      default_file_explorer = true,     
+      default_file_explorer = true,
       skip_confirm_form_simple_edits = true,
       keymaps = {
         ["l"] = "actions.select",
@@ -16,6 +16,7 @@ return {
         }
       }
     },
+    cmd = "Oil",
     keys = {
       {
         "<leader>e",
@@ -32,6 +33,5 @@ return {
         desc = "File Explorer (CWD)"
       }
     },
-    lazy = false
   }
 }

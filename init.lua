@@ -10,11 +10,11 @@ vim.opt.number = true
 vim.opt.encoding = "utf-8"
 
 -- For Treesitter folding support
-vim.cmd [[
+vim.cmd([[
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set nofoldenable
-]]
+]])
 -- Make tabs a sensible size and uses spaces instead of tabs
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
