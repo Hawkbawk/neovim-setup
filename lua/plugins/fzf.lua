@@ -3,7 +3,7 @@ return {
     "ibhagwan/fzf-lua",
     cmd = "FzfLua",
     opts = {
-      'max-perf', -- The profile to use, see :h fzf-lua-profiles for options
+      'fzf-native', -- The profile to use, see :h fzf-lua-profiles for options
       files = {
         fd_opts = "--color=never --type f --hidden --no-ignore --exclude node_modules --exclude .git"
       }

@@ -16,6 +16,7 @@ return {
         }
       }
     },
+    event = "VeryLazy",
     cmd = "Oil",
     keys = {
       {
