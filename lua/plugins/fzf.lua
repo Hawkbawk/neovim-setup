@@ -3,7 +3,9 @@ return {
     "ibhagwan/fzf-lua",
     cmd = "FzfLua",
     opts = {
-      'fzf-native', -- The profile to use, see :h fzf-lua-profiles for options
+      grep = {
+        rg_glob = true
+      },
       files = {
         fd_opts = "--color=never --type f --hidden --no-ignore --exclude node_modules --exclude .git"
       }

@@ -37,8 +37,3 @@ autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
     end
   end
 })
-
-autocmd("BufWritePre", {
-  pattern = "*",
-  command = [[%s/\s\+$//e]]
-})

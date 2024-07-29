@@ -7,6 +7,10 @@ vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
 vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
 vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
 vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
+
+-- Move around tabs easier
+vim.keymap.set("n", "<S-h>", ":tabprev<cr>", opts)
+vim.keymap.set("n", "<S-l>", ":tabnext<cr>", opts)
 -- Exit the terminal easier
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", opts)
 vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
